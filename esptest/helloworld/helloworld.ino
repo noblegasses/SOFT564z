@@ -3,9 +3,7 @@ IPAddress ip(192,168,0,85);
 IPAddress gateway(192,168,0,1);
 IPAddress subnet(255,255,255,0);
 char ssid[]="CityLets WiFi";
-char pswd[]="CityLetsProp!!";
-//char ssid[]="NaoNetwork";
-//char pswd[]="j0hnc01r0";
+char pswd[]="CityLetsProp!!"; 
 const uint port= 1001;
 int Status = WL_IDLE_STATUS;
 boolean alreadyConnected = false;
@@ -30,18 +28,17 @@ void setup() {
  Serial.print("ayy, I'm connected, My IP is:");
  IPAddress myAddress = WiFi.localIP();
  Serial.println(myAddress);
+ 
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
  WiFiClient client = Server.available();
  while (client){
-  Serial.print("status is: ");
-  Serial.println(client);
   if(!alreadyConnected){
     client.flush();
     Serial.println("new client");
-    client.print("Hello world, and all that\r\n");
+    client.print("Hello world, and all that\n\r");
     alreadyConnected=true;
     }
    if(client.available()>0){
@@ -54,7 +51,6 @@ void loop() {
       client.print("\r\n");
       }
     }
-  client = Server.available();
- }
+  }
  alreadyConnected = false;
 }
