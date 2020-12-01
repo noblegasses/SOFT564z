@@ -2,10 +2,10 @@
 IPAddress ip(192,168,0,85);
 IPAddress gateway(192,168,0,1);
 IPAddress subnet(255,255,255,0);
-char ssid[] = "NaoNetwork";
-char pswd[] ="j0hnc01r0";
-//char ssid[]="CityLets WiFi";
-//char pswd[]="CityLetsProp!!"; 
+//char ssid[] = "NaoNetwork";
+//char pswd[] ="j0hnc01r0";
+char ssid[]="CityLets WiFi";
+char pswd[]="CityLetsProp!!"; 
 const uint port= 1001;
 int Status = WL_IDLE_STATUS;
 boolean alreadyConnected = false;
@@ -27,6 +27,7 @@ void setup() {
  delay(5000);
  }
  Server.begin();
+ Serial.println(WiFi.macAddress());
  Serial.print("ayy, I'm connected, My IP is:");
  IPAddress myAddress = WiFi.localIP();
  Serial.println(myAddress);
