@@ -1,11 +1,18 @@
 #include<WiFi.h>
-IPAddress ip(192,168,0,85);
+#include "tinyxml2.h"
+//IPAddress ip(192,168,0,85);
+int dummyip[4]={192,168,0,85};
+IPAddress ip(192,168,12,69);
 IPAddress gateway(192,168,0,1);
 IPAddress subnet(255,255,255,0);
 //char ssid[] = "NaoNetwork";
 //char pswd[] ="j0hnc01r0";
-char ssid[]="CityLets WiFi";
-char pswd[]="CityLetsProp!!"; 
+//char ssid[]="CityLets WiFi";
+//char pswd[]="CityLetsProp!!"; 
+//char ssid[] = "smb307-humanoids";
+//char pswd[] = "Humanoid5";
+char ssid[]= "NickNetwork-5G";
+char pswd[]= "R0b0t1c5";
 const uint port= 1001;
 int Status = WL_IDLE_STATUS;
 boolean alreadyConnected = false;
@@ -27,7 +34,6 @@ void setup() {
  delay(5000);
  }
  Server.begin();
- Serial.println(WiFi.macAddress());
  Serial.print("ayy, I'm connected, My IP is:");
  IPAddress myAddress = WiFi.localIP();
  Serial.println(myAddress);

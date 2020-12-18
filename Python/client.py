@@ -1,6 +1,7 @@
 import socket
 
-Host = "192.168.0.85"
+#Host = "192.168.0.85"
+Host = "192.168.12.69"
 Port= 1001
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((Host, Port))
