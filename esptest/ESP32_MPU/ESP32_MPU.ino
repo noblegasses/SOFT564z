@@ -16,7 +16,7 @@ char* convert_int16_to_str(int16_t i) { // converts int16 to string. Moreover, r
 void setup() {
   Serial.begin(9600);
   Wire.begin(0x16);
-  Wire.beginTransmission(MPU_ADDR); // Begins a transmission to the I2C slave (GY-521 board)
+  Wire.beginTransmission(MPU_ADDR); // Begins a   transmission to the I2C slave (GY-521 board)
   Wire.write(0x6B); // PWR_MGMT_1 register
   Wire.write(0); // set to zero (wakes up the MPU-6050)
   Wire.endTransmission(true);
