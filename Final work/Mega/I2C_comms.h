@@ -8,7 +8,7 @@
 extern float dataArray[9];
 extern void I2CSetup(int ardAddr,int IMUAddr);
 extern void sendData();
-extern void receiveData();
-extern void UpdateLCD();
+extern void receiveData(int howMany);
+extern void UpdateLCD(char *line1, char *line2);
 extern void DisplayError(char *error);
 #endif
