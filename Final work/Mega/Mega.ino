@@ -2,11 +2,10 @@
 #include "I2C_comms.h"
 void setup() {
 Serial.begin(115200);
+motorSetup();
 I2CSetup(0x5,0x68);
-Wire.onReceive(receiveData);
-Wire.begin(0x5);
-
-
+//Wire.begin(0x5);
+//Wire.onReceive(receiveData);
 }
 
 void loop() {
