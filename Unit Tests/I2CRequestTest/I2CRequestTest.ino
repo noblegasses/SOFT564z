@@ -6,11 +6,11 @@ void setup() {
 
 void loop() {
   //request 2 floats(4 bits each) from follower
-  Wire.requestFrom(0x5,4*2, true);
-  float sensors[2];
+  int sensors[2];
   byte idx =0;
+  Wire.requestFrom(0x5,4,true);
   while(Wire.available()&&idx<sizeof(sensors)){
-   sensors[idx++] = Wire.read();
+   sensors[idx++] = Wire.read()<<8|Wire.read();;
  }
  Serial.print ("Distance is:");
  Serial.print(sensors[0]);

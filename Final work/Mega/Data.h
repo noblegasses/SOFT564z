@@ -4,7 +4,7 @@
 #include "Distance_Sensor.h"
 #include "MPU.h"
 #include "Water_Sensor.h"
-extern float dataArray[];
+extern volatile int dataArray[2];
 extern void sensorSetup(int addr);
 extern void sensorRead();
 #endif

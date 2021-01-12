@@ -5,7 +5,7 @@
 #include <Arduino.h>
 #include<Wire.h>
 #include<LiquidCrystal_I2C.h>
-extern float dataArray[9];
+extern volatile int dataArray[2];
 extern void I2CSetup(int ardAddr,int IMUAddr);
 extern void sendData();
 extern void receiveData(int howMany);

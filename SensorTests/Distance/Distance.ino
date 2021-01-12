@@ -1,11 +1,12 @@
-#include "Distance_Sensor.h"
-const int echo = 0;//set the echo pin of the sensor to be PWM pin digital 0
-const int trigger = 1;//set the trigger pin of the sensor to be pin digital 1 
-void distanceSetup(){//set up the control and data pins of the distance sensor
-pinMode(trigger, OUTPUT);
-pinMode(echo, INPUT);
+const int echo = 0;
+const int trigger = 1;
+void setup() {
+ Serial.begin(115200);
+ pinMode(trigger, OUTPUT);
+ pinMode(echo, INPUT);
 }
-int distanceRead(){
+
+void loop() {
   int duration;
   //clear pin condition
   digitalWrite(trigger,LOW);
@@ -18,6 +19,7 @@ int distanceRead(){
   //read the duration for pulse return
   duration = pulseIn(echo, HIGH);
   //calcuate distance in mm by dividing by the speed of sound in mm
-  float distance = duration * 0.034 / 2;
-  return distance;
+  float distance = duration * 0.0034 / 2;
+  Serial.println(duration);
+  Serial.println(distance);
 }
