@@ -1,9 +1,13 @@
+#include "WIFI_Socketing.h"
+#include "I2C_Leader.h"
+#include "LED.h"
 void setup() {
-  // put your setup code here, to run once:
-
+ I2CSetup();
+ LEDSetup();
+ WiFiSetup();
+ Serial.begin (115200);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-
+ WiFiMode();
 }

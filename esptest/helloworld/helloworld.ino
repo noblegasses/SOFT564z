@@ -1,9 +1,9 @@
 #include<WiFi.h>
 #include "tinyxml2.h"
 //IPAddress ip(192,168,0,85);
-int dummyip[4]={192,168,0,85};
-IPAddress ip(192,168,12,69);
-IPAddress gateway(192,168,0,1);
+int dummyip[4]={192,168,1,85};
+IPAddress ip(192,168,1,85);
+IPAddress gateway(192,168,1,1);
 IPAddress subnet(255,255,255,0);
 //char ssid[] = "NaoNetwork";
 //char pswd[] ="j0hnc01r0";
@@ -11,7 +11,7 @@ IPAddress subnet(255,255,255,0);
 //char pswd[]="CityLetsProp!!"; 
 //char ssid[] = "smb307-humanoids";
 //char pswd[] = "Humanoid5";
-char ssid[]= "NickNetwork-5G";
+char ssid[]= "NickNetwork";
 char pswd[]= "R0b0t1c5";
 const uint port= 1001;
 int Status = WL_IDLE_STATUS;
@@ -55,7 +55,7 @@ void loop() {
     Server.write(clientinput);
     client.print(clientinput);
     Serial.print(clientinput);
-    if (client.available()<0){
+    if (client.available()<=0){
       Serial.print("\r\n");
       client.print("\r\n");
       }
