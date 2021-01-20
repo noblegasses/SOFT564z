@@ -3,7 +3,7 @@ import os
 import time
 import random
 import WifiBackend
-import time
+import threading 
 from collections import defaultdict
 
 pygame.font.init()
@@ -151,10 +151,13 @@ def GUI():
     run = False
    pressedkey = parse_keys()
    redraw_window(pressedkey)
-   [Ultrasonic, Water_level] = WifiBackend.sendReceive(S,Movedata)
-
+   print(WifiBackend.sendReceive(S,Movedata))
+   print(received)
+   #for item in Movedata:
+    #WifiBackend.sendMoveData(str(item),S)
+   #print(WifiBackend.receiveSensorData(S))
     
-
+#S = WifiBackend.socketSetup(host, port)
 S = WifiBackend.socketSetup(host, port)
 GUI()
 WifiBackend.CloseConnection(S)

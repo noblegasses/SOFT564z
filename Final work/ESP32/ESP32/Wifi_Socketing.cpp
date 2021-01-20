@@ -36,35 +36,46 @@ void WiFiMode(){
  WiFiClient client = Server.available();
  while (client){
     if (!alreadyConnected){
+    alreadyConnected=true;
     CLIENT_CONNECTED();
+    Serial.println("new client");
     client.flush();
     }
    bool dataInteg = true; 
-   for(int i =0; client.available()>0&&i<4; i++){
+   while (client.available()>0){
     char clientinput = client.read();
-    if (i<sizeof(moveArray)){
-      if (checkValid(clientinput)){
-       moveArray[i] = clientinput;
+    if (clientinput == 'F' ||
+        clientinput == 'B' || 
+        clientinput == 'L' ||  
+        clientinput == 'R' || 
+        clientinput == 'S' ){
+     dataArray[0] = clientinput;
+     for (int i = 1; i<4; i++){
+      dataArray[i] = client.read();
+     }
+     //validate the rest of the bus
+     for(int i = 1;i<4; i++){
+      if (dataArray[i]-48 <0 || dataArray[i]-48>9){
+       dataInteg=false;
+       BAD_DATA();//raise error light
       }
-      }
-    else{
-      dataInteg=false;
-      BAD_DATA();
+      else{//if data is good
+      DATA_CLEARED(); 
+     }
     }
-    }
-  for (int i =0; i<4; i++){
-    Serial.print (moveArray[i]);
-    }
-  Serial.print("\n\r");
+   }
+  }
   RequestSensors();
-  for (int i=0; i<sizeof(dataArray)/2; i++){
+  client.print('S');//start character to sync data stream
+  for (int i=0; i<2;i++) {
     client.print(dataArray[i]);
+    client.print('E');//stop character to differentiate letters
+   }
   if (dataInteg){
     SendMovement();
-  }
   }
 }
 alreadyConnected = false;
 CLIENT_DISCONNECTED();
-delay(500); 
+delay(50); 
 }

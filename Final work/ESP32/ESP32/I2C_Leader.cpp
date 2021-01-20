@@ -12,6 +12,8 @@ void RequestSensors(){
 }
 void SendMovement(){
  Wire.beginTransmission(boardAddr);
+ //for (int i = 0; i<sizeof(moveArray); i++){
  Wire.write(moveArray);
+ //}
  Wire.endTransmission();
 }
