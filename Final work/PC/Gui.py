@@ -4,6 +4,7 @@ import time
 import random
 import WifiBackend
 import time
+from copy import deepcopy
 from collections import defaultdict
 
 pygame.font.init()
@@ -33,6 +34,7 @@ F_pressed = pygame.transform.scale(pygame.image.load(os.path.join("assets","F_pr
 def GUI():
  run = True
  Movedata=["S","0","9","0"]
+ oldData=[]
  FPS = 60
  Ultrasonic = 0
  Water_level = 0
@@ -85,7 +87,7 @@ def GUI():
     return list(str(servo_pos))
   pressed={"up":"F",
            "left":"L",
-           "down":"D",
+           "down":"B",
            "right":"R",
            "F":incrementServo,
            "V":decrementServo,
@@ -151,7 +153,8 @@ def GUI():
     run = False
    pressedkey = parse_keys()
    redraw_window(pressedkey)
-   [Ultrasonic, Water_level] = WifiBackend.sendReceive(S,Movedata)
+   [Ultrasonic, Water_level] = WifiBackend.sendReceive(S,Movedata,oldData)
+   oldData = deepcopy(Movedata)
 
     
 

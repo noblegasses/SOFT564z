@@ -9,7 +9,7 @@ def socketSetup(host, port):
  s.connect((host, port))
  return s
 def sendMoveData(data, s):
-  #print(data)
+  print(data)
   s.send(data.encode())
 def receiveSensorData(s):
  data=["",""]
@@ -21,9 +21,10 @@ def receiveSensorData(s):
  return data
 def CloseConnection(s):
     s.close()
-def sendReceive(S,sendingData):
- strData = ''.join(sendingData)
- sendMoveData(strData, S)
+def sendReceive(S,sendingData,oldData):
+ if sendingData != oldData:
+  strData = ''.join(sendingData)
+  sendMoveData(strData, S)
  return receiveSensorData(S)
  #return [0,0]
      

@@ -62,7 +62,6 @@ void loop() {
   int dummyData[] = {10,400};
   client.print('S');//start character to sync data stream
   for (int i=0; i<2;i++) {
-
     client.print(dummyData[i]);
     client.print('E');//stop character to differentiate letters
    }

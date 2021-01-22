@@ -42,20 +42,24 @@ void WiFiMode(){
     client.flush();
     }
    bool dataInteg = true; 
+   bool updateMove= false;
    while (client.available()>0){
+    Serial.print(client.available());
+    Serial.println("bytes avialable");
+    updateMove=true;
     char clientinput = client.read();
     if (clientinput == 'F' ||
         clientinput == 'B' || 
         clientinput == 'L' ||  
         clientinput == 'R' || 
         clientinput == 'S' ){
-     dataArray[0] = clientinput;
+     moveArray[0] = clientinput;
      for (int i = 1; i<4; i++){
-      dataArray[i] = client.read();
+      moveArray[i] = client.read();
      }
      //validate the rest of the bus
      for(int i = 1;i<4; i++){
-      if (dataArray[i]-48 <0 || dataArray[i]-48>9){
+      if (moveArray[i]-48 <0 || moveArray[i]-48>9){
        dataInteg=false;
        BAD_DATA();//raise error light
       }
@@ -63,6 +67,7 @@ void WiFiMode(){
       DATA_CLEARED(); 
      }
     }
+    Serial.println("left if");
    }
   }
   RequestSensors();
@@ -71,7 +76,7 @@ void WiFiMode(){
     client.print(dataArray[i]);
     client.print('E');//stop character to differentiate letters
    }
-  if (dataInteg){
+  if (dataInteg&&updateMove){
     SendMovement();
   }
 }

@@ -12,8 +12,13 @@ void RequestSensors(){
 }
 void SendMovement(){
  Wire.beginTransmission(boardAddr);
- //for (int i = 0; i<sizeof(moveArray); i++){
- Wire.write(moveArray);
- //}
+ for (int i = 0; i<4; i++){
+  Wire.write(moveArray[i]);
+ }
  Wire.endTransmission();
+ Serial.print("sending movement: ");
+ //for (int i = 0; i<sizeof(moveArray); i++){
+ Serial.println(moveArray);
+ //}
+ //Serial.println();
 }

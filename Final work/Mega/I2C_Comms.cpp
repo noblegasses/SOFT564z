@@ -30,43 +30,11 @@ void sendData(){
 
 
 void receiveData(int howMany){
-  int pos =0;
-  char buff[4];
   byte idx = 0;
   while(Wire.available()&&idx<4){
-     buff[idx++] = Wire.read(); // receive byte as a character
+     MotorMove[idx] = Wire.read(); // receive byte as a character
+     Serial.print(MotorMove[idx++]);
   }
-  for(int i=0;i<sizeof(buff);i++){
-   Serial.print(buff[i]);
-   if (i== 0) {
-  switch  (buff[i]){
-    case ('F'):
-     Forwards();
-    break;
-    case ('B'):
-     Backwards();
-    break;
-    case('L'):
-     Left();
-    break;
-    case('R'):
-     Right();
-    break;
-    case('S'):
-     Stop();
-    break;
-    //if unexpected value then error on LCD
-    default:
-     Stop();
-     char message[]="Invalid Direction Character";
-   }
-  }
- if (i >= 1){
-   pos = pos + (buff[i]-'0')*pow(10,3-i);
-  }
- }
- Move_Servo(pos);
-  Serial.print('\n');
 }
 
 
