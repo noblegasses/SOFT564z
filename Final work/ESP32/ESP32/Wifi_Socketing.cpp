@@ -12,7 +12,10 @@ IPAddress subnet(255,255,255,0);
 WiFiServer Server(port);
 void WiFiSetup() {
   if (!WiFi.config(ip, gateway, subnet)) {
-    Serial.println("STA Failed to configure");
+    WIFI_DISCONNECTED();
+    WIFI_AP_DISCONNECTED();
+    BAD_DATA();
+    //Serial.println("STA Failed to configure");
   }
  //if the board device cannot connect to WiFi, open device as it's own access point
  for (int i=0; i<=5 && Status!=WL_CONNECTED; i++){
@@ -38,14 +41,12 @@ void WiFiMode(){
     if (!alreadyConnected){
     alreadyConnected=true;
     CLIENT_CONNECTED();
-    Serial.println("new client");
+    //Serial.println("new client");
     client.flush();
     }
    bool dataInteg = true; 
    bool updateMove= false;
    while (client.available()>0){
-    Serial.print(client.available());
-    Serial.println("bytes avialable");
     updateMove=true;
     char clientinput = client.read();
     if (clientinput == 'F' ||
@@ -67,7 +68,6 @@ void WiFiMode(){
       DATA_CLEARED(); 
      }
     }
-    Serial.println("left if");
    }
   }
   RequestSensors();
@@ -76,11 +76,16 @@ void WiFiMode(){
     client.print(dataArray[i]);
     client.print('E');//stop character to differentiate letters
    }
+  //Serial.println("sending Data");
   if (dataInteg&&updateMove){
     SendMovement();
   }
 }
 alreadyConnected = false;
 CLIENT_DISCONNECTED();
+if (moveArray[0] != 'S'){
+ moveArray[0]='S';//emergency brake
+ SendMovement();
+}
 delay(50); 
 }

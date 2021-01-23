@@ -1,6 +1,6 @@
 #include "Motor.h"
 //Set the motor's speed by PWM value
-int Speed=150; 
+int Speed=200; 
 //initalize channel A motor, brake, and throttle pins 
 const int AMot = 12;
 const int ABra = 9;

@@ -4,5 +4,12 @@ void waterSetup(){
  pinMode(Water_pin, INPUT);
 }
 int waterRead(){
-return analogRead(Water_pin);  
+ int level = analogRead(Water_pin);
+ if (level>=200){
+  level= map(level,200,360,0,40);
+ }
+ else{
+   level=0;
+ }
+return level;  
 }

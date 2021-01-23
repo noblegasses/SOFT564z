@@ -5,7 +5,7 @@ void setup() {
  I2CSetup();
  LEDSetup();
  WiFiSetup();
- Serial.begin (115200);
+ //Serial.begin (115200);
 }
 
 void loop() {

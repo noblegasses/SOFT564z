@@ -24,8 +24,6 @@ void sendData(){
  Wire.write(msb);
  Wire.write(lsb);
  }
- 
- //Wire.write((uint8_t*)dataArray,sizeof(dataArray));
 }
 
 

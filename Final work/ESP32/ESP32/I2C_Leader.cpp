@@ -16,9 +16,4 @@ void SendMovement(){
   Wire.write(moveArray[i]);
  }
  Wire.endTransmission();
- Serial.print("sending movement: ");
- //for (int i = 0; i<sizeof(moveArray); i++){
- Serial.println(moveArray);
- //}
- //Serial.println();
 }

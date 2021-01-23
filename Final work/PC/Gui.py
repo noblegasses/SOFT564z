@@ -101,7 +101,7 @@ def GUI():
  def redraw_window(key):
   #place object in the top left corner (0,0)
   WINDOW.blit(Background,(0,0))
-  Distance_label = main_font.render(f"Distance:{Ultrasonic}", 1, (0,255,0))
+  Distance_label = main_font.render(f"Distance:{Ultrasonic} mm", 1, (0,255,0))
   WINDOW.blit(Distance_label,(10,10))
   Water_Level_label = main_font.render(f"Water Level:{Water_level}", 1, (0,255,0))
   WINDOW.blit(Water_Level_label,(WIDTH-150,10))
@@ -152,12 +152,18 @@ def GUI():
    if event.type == pygame.QUIT:
     run = False
    pressedkey = parse_keys()
-   redraw_window(pressedkey)
+  redraw_window(pressedkey)
+  if time.perf_counter()-startTime >0.005:
+   startTime= time.perf_counter()
    [Ultrasonic, Water_level] = WifiBackend.sendReceive(S,Movedata,oldData)
    oldData = deepcopy(Movedata)
-
-    
-
-S = WifiBackend.socketSetup(host, port)
-GUI()
+ return True
+Done = False
+while(not Done):
+ try:
+  S = WifiBackend.socketSetup(host, port)
+  Done = GUI()
+ except Exception:
+  print("Reconnecting")
+  WifiBackend.CloseConnection(S)
 WifiBackend.CloseConnection(S)
