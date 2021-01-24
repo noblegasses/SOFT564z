@@ -12,6 +12,7 @@
 
 BluetoothSerial SerialBT;
 
+
 void setup() {
   Serial.begin(115200);
   SerialBT.begin("ESP32test"); //Bluetooth device name

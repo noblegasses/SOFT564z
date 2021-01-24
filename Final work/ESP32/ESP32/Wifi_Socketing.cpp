@@ -87,5 +87,7 @@ if (moveArray[0] != 'S'){
  moveArray[0]='S';//emergency brake
  SendMovement();
 }
+WIFI_DISCONNECTED();
+WIFI_AP_DISCONNECTED();
 delay(50); 
 }

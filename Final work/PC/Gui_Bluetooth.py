@@ -2,7 +2,7 @@ import pygame
 import os
 import time
 import random
-import WifiBackend
+import BTBackend
 import time
 from copy import deepcopy
 from collections import defaultdict
@@ -13,9 +13,9 @@ KEYWIDTH, KEYHEIGHT = int(WIDTH/10), int(HEIGHT/10)
 WINDOW = pygame.display.set_mode((WIDTH,HEIGHT))
 Sensordata = []
 servo_pos= 90
-port = 1001
-host = "192.168.1.85"
-pygame.display.set_caption("GUI")
+port = 3
+MacAddress = "fc:f5:c4:0f:bd:a2"
+pygame.display.set_caption("Bluetooth GUI")
 Background = pygame.transform.scale(pygame.image.load(os.path.join("assets","asset.png")), (WIDTH,HEIGHT))
 W_unpressed = pygame.transform.scale(pygame.image.load(os.path.join("assets","W_unpressed.png")), (KEYWIDTH,KEYHEIGHT))
 A_unpressed = pygame.transform.scale(pygame.image.load(os.path.join("assets","A_unpressed.png")), (KEYWIDTH,KEYHEIGHT))
@@ -155,15 +155,15 @@ def GUI():
   redraw_window(pressedkey)
   if time.perf_counter()-startTime >0.005:
    startTime= time.perf_counter()
-   [Ultrasonic, Water_level] = WifiBackend.sendReceive(S,Movedata,oldData)
+   [Ultrasonic, Water_level] =BTBackend.sendReceive(S,Movedata,oldData)
    oldData = deepcopy(Movedata)
  return True
 Done = False
 while(not Done):
  try:
-  S = WifiBackend.socketSetup(host, port)
+  S = BTBackend.socketSetup(MacAddress, port)
   Done = GUI()
  except Exception:
   print("Reconnecting")
-  WifiBackend.CloseConnection(S)
-WifiBackend.CloseConnection(S)
+  BTBackend.CloseConnection(S)
+BTBackend.CloseConnection(S)

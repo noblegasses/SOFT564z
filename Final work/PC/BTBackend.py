@@ -3,7 +3,7 @@ moveData=['S','0','0','0']
 InData = [0,0]
 
 def socketSetup(host, port):
- s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+ s = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
  s.connect((host, port))
  return s
 def sendMoveData(data, s):
@@ -23,5 +23,3 @@ def sendReceive(S,sendingData,oldData):
   strData = ''.join(sendingData)
   sendMoveData(strData, S)
  return receiveSensorData(S)
- #return [0,0]
-     
