@@ -1,3 +1,4 @@
+//this is unimplemented
 #ifndef BLUETOOTHSTUFF_H
 #define BLUETOOTHSTUFF_H
 #include "BluetoothSerial.h"
