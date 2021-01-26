@@ -30,8 +30,7 @@ void sendData(){
 void receiveData(int howMany){
   byte idx = 0;
   while(Wire.available()&&idx<4){
-     MotorMove[idx] = Wire.read(); // receive byte as a character
-     Serial.print(MotorMove[idx++]);
+     MotorMove[idx++] = Wire.read(); // receive byte as a character
   }
 }
 

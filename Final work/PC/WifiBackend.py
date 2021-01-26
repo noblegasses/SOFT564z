@@ -18,10 +18,9 @@ def receiveSensorData(s):
  return data
 def CloseConnection(s):
     s.close()
-def sendReceive(S,sendingData,oldData):
+def sendNew(S,sendingData,oldData):
  if sendingData != oldData:
   strData = ''.join(sendingData)
   sendMoveData(strData, S)
- return receiveSensorData(S)
- #return [0,0]
+ #return receiveSensorData(S)
      

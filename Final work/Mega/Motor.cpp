@@ -10,7 +10,7 @@ const int BMot =13;
 const int BBra =8;
 const int BThrot = 11;
 //initalize servo control
-char MotorMove[4]={'S','2','5','5'};
+volatile char MotorMove[4]={'S','2','5','5'};
 Servo sensorArm;
 int servoPin = 10;
 void motorSetup(){
@@ -91,7 +91,9 @@ void Move_motors(){
   }
   
   if (i >= 1){
+   if (i-'0'<9 && i-'0'>0){
    pos = pos + (MotorMove[i]-'0')*pow(10,3-i);
+   }
   }
  }
  Move_Servo(pos);

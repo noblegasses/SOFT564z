@@ -1,7 +1,6 @@
 import pygame
 import os
 import time
-import random
 import WifiBackend
 import time
 from copy import deepcopy
@@ -13,10 +12,10 @@ KEYWIDTH, KEYHEIGHT = int(WIDTH/10), int(HEIGHT/10)
 WINDOW = pygame.display.set_mode((WIDTH,HEIGHT))
 Sensordata = []
 servo_pos= 90
-port = 1001
+port = 49153
 host = "192.168.1.85"
 pygame.display.set_caption("GUI")
-Background = pygame.transform.scale(pygame.image.load(os.path.join("assets","asset6.png")), (WIDTH,HEIGHT))
+Background = pygame.transform.scale(pygame.image.load(os.path.join("assets","asset.png")), (WIDTH,HEIGHT))
 W_unpressed = pygame.transform.scale(pygame.image.load(os.path.join("assets","W_unpressed.png")), (KEYWIDTH,KEYHEIGHT))
 A_unpressed = pygame.transform.scale(pygame.image.load(os.path.join("assets","A_unpressed.png")), (KEYWIDTH,KEYHEIGHT))
 S_unpressed = pygame.transform.scale(pygame.image.load(os.path.join("assets","S_unpressed.png")), (KEYWIDTH,KEYHEIGHT))
@@ -153,17 +152,20 @@ def GUI():
     run = False
    pressedkey = parse_keys()
   redraw_window(pressedkey)
-  if time.perf_counter()-startTime >0.005:
-   startTime= time.perf_counter()
-   [Ultrasonic, Water_level] = WifiBackend.sendReceive(S,Movedata,oldData)
-   oldData = deepcopy(Movedata)
+  [Ultrasonic, Water_level] = WifiBackend.receiveSensorData(S)
+  #if time.perf_counter()-startTime >0.005:
+  # startTime= time.perf_counter()
+  WifiBackend.sendNew(S,Movedata,oldData)
+  oldData = deepcopy(Movedata)
  return True
 Done = False
+S= False
 while(not Done):
  try:
   S = WifiBackend.socketSetup(host, port)
   Done = GUI()
  except Exception:
   print("Reconnecting")
-  WifiBackend.CloseConnection(S)
+  if S:
+   WifiBackend.CloseConnection(S)
 WifiBackend.CloseConnection(S)

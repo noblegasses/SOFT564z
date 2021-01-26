@@ -12,9 +12,9 @@ void setup() {
  //}
  //else{
  //BTSetup("ESP32");
- }
- pinMode(ModePin, INPUT);
- //Serial.begin (115200);
+ //}
+ //pinMode(ModePin, INPUT);
+ Serial.begin (115200);
 }
 
 void loop() {

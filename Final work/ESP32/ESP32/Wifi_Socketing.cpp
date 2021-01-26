@@ -37,6 +37,7 @@ void WiFiSetup() {
 
 void WiFiMode(){
  WiFiClient client = Server.available();
+ unsigned long start = millis();
  while (client){
     if (!alreadyConnected){
     alreadyConnected=true;
@@ -70,24 +71,31 @@ void WiFiMode(){
     }
    }
   }
+  //if (millis()-start>50){
+  //start = millis();
+  //Serial.print("sending");
   RequestSensors();
   client.print('S');//start character to sync data stream
   for (int i=0; i<2;i++) {
     client.print(dataArray[i]);
     client.print('E');//stop character to differentiate letters
+    Serial.print(dataArray[i]);
+    Serial.print(" ");
    }
+   Serial.println();
   //Serial.println("sending Data");
   if (dataInteg&&updateMove){
     SendMovement();
   }
+  //}
 }
 alreadyConnected = false;
 CLIENT_DISCONNECTED();
-}
 if (moveArray[0] != 'S'){
  moveArray[0]='S';//emergency brake
  SendMovement();
 WIFI_DISCONNECTED();
 WIFI_AP_DISCONNECTED();
 delay(50); 
+}
 }
