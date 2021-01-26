@@ -13,8 +13,8 @@ KEYWIDTH, KEYHEIGHT = int(WIDTH/10), int(HEIGHT/10)
 WINDOW = pygame.display.set_mode((WIDTH,HEIGHT))
 Sensordata = []
 servo_pos= 90
-port = 3
-MacAddress = "fc:f5:c4:0f:bd:a2"
+port = 0
+MacAddress = "FC:F5:C4:0F:BD:A2"
 pygame.display.set_caption("Bluetooth GUI")
 Background = pygame.transform.scale(pygame.image.load(os.path.join("assets","asset.png")), (WIDTH,HEIGHT))
 W_unpressed = pygame.transform.scale(pygame.image.load(os.path.join("assets","W_unpressed.png")), (KEYWIDTH,KEYHEIGHT))

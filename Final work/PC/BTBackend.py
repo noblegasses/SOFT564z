@@ -4,7 +4,15 @@ InData = [0,0]
 
 def socketSetup(host, port):
  s = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
- s.connect((host, port))
+ connection = False
+ while not connection:
+  try:
+   s.connect((host, port))
+  except Exception:
+   print (port, "failed")
+   port += 1
+  else:
+   connection = True
  return s
 def sendMoveData(data, s):
   s.send(data.encode())
