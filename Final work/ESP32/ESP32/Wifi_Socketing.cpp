@@ -3,7 +3,7 @@ char SSIDinternal[]="espWiFi";
 char PSWDinternal[]="ShortRange";
 char SSIDexternal[]="NickNetwork";
 char PSWDexternal[]="R0b0t1c5";
-const uint port= 1001;
+const uint port= 49153;
 int Status = WL_IDLE_STATUS;
 boolean alreadyConnected = false;
 IPAddress ip(192,168,1,85);
@@ -83,10 +83,10 @@ void WiFiMode(){
 }
 alreadyConnected = false;
 CLIENT_DISCONNECTED();
+}
 if (moveArray[0] != 'S'){
  moveArray[0]='S';//emergency brake
  SendMovement();
-}
 WIFI_DISCONNECTED();
 WIFI_AP_DISCONNECTED();
 delay(50); 
